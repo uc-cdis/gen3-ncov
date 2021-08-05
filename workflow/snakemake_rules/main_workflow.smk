@@ -1133,6 +1133,8 @@ rule find_clusters:
         node_data="results/{build_name}/clusters.json",
     benchmark:
         "benchmarks/find_clusters_{build_name}.txt",
+    conda:
+        config["conda_environment"],
     log:
         "logs/find_clusters_{build_name}.txt",
     params:

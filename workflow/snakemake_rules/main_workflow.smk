@@ -1130,7 +1130,7 @@ rule find_clusters:
         metadata="results/{build_name}/metadata_adjusted.tsv.xz",
         mutations="results/{build_name}/nt_muts.json",
     output:
-        node_data="results/{build_name}/clusters.json",
+        clusters="results/{build_name}/clusters.tsv",
     benchmark:
         "benchmarks/find_clusters_{build_name}.txt",
     conda:
@@ -1148,7 +1148,7 @@ rule find_clusters:
            --metadata {input.metadata} \
            --mutations {input.mutations} \
            --group-by {params.group_by} \
-           --output-node-data {output.node_data}
+           --output {output.clusters}
        """
 
 def export_title(wildcards):
@@ -1185,8 +1185,7 @@ def _get_node_data_by_wildcards(wildcards):
         rules.traits.output.node_data,
         rules.logistic_growth.output.node_data,
         rules.aa_muts_explicit.output.node_data,
-        rules.distances.output.node_data,
-        rules.find_clusters.output.node_data
+        rules.distances.output.node_data
     ]
 
     if "run_pangolin" in config and config["run_pangolin"]:

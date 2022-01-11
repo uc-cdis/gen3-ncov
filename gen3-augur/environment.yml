@@ -1,0 +1,21 @@
+name: gen3-augur
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - augur
+  - python
+  - mafft
+  - nextalign
+  - pangolin
+  - pangolearn
+  - raxml
+  - fasttree
+  - iqtree
+  - vcftools
+  - pip
+  - pip:
+    - biopython
+    - pandas
+    - requests

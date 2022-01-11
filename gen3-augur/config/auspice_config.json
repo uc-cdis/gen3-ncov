@@ -1,0 +1,114 @@
+{
+  "title": "Nextstrain build for Covid19 virus",
+  "maintainers": [
+    {"name": "Gen3"}
+  ],
+  "build_url": "https://github.com/uc-cdis/gen3-augur",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "num_date",
+      "title": "Date",
+      "type": "continuous"
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical"
+    },
+    {
+      "key": "region",
+      "title": "Region",
+      "type": "categorical"
+    },
+     {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
+    },
+    {
+      "key": "location",
+      "title": "Location",
+      "type": "categorical"
+    },
+    {
+      "key": "clade_membership",
+      "title": "Clade",
+      "type": "categorical"
+    },
+    {
+      "key": "object_id",
+      "title": "GUID",
+      "type": "categorical"
+    },
+    {
+      "key": "file_name",
+      "title": "File",
+      "type": "categorical"
+    },
+    {
+      "key": "file_size",
+      "title": "Size",
+      "type": "continuous"
+    },
+    {
+      "key":"S1_mutations",
+      "title": "S1 mutations",
+      "type": "categorical"
+    },
+    {
+      "key":"emerging_lineage",
+      "title":"Emerging_lineage",
+      "type": "categorical"
+    },
+    {
+      "key":"logistic_growth",
+      "title":"Logistic growth",
+      "type": "continuous"
+    },
+    {
+      "key":"current_frequency",
+      "title":"Current Frequency",
+      "type": "continuous"
+    },
+    {
+      "key": "pango_lineage_local",
+      "title": "PANGO Lineage",
+      "type": "categorical"
+    }
+  ],
+  "geo_resolutions": [
+    "country",
+    "region",
+    "division",
+    "location"
+  ],
+  "panels": [
+     "tree",
+     "map",
+     "entropy",
+     "frequencies"
+  ],
+  "display_defaults": {
+    "map_triplicate": true
+  },
+  "filters": [
+    "country",
+    "region",
+    "division",
+    "location",
+    "pango_lineage_local",
+    "current_frequency",
+    "logistic_growth",
+    "clade_membership"
+  ]
+}

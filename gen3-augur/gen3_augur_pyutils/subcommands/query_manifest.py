@@ -2,6 +2,7 @@
 Query genomic data file and save in json format
 
 @author: Yilin Xu <yilinxu@uchicago.edu>
+         Qiong Liu <qiongl@uchicago.edu>
 """
 
 import json
@@ -40,7 +41,12 @@ class Gen3Query(Subcommand):
         parser.add_argument(
             "--value", required=False, help="property value for filtering"
         )
-        parser.add_argument("--format", required=True, help="output file format")
+        parser.add_argument(
+            "--format",
+            required=True,
+            choices=["json", "csv", "tsv"],
+            help="output file format",
+        )
         parser.add_argument("--logfile", required=True, help="log file name")
 
     @classmethod
@@ -87,6 +93,22 @@ class Gen3Query(Subcommand):
                 return len(data)
             else:
                 df = pd.DataFrame(data)
+                df.drop(
+                    [
+                        "organism",
+                        "file_name",
+                        "sample_type",
+                        "object_id",
+                        "nextstrain_clade",
+                        "file_size",
+                        "zipcode",
+                        "isolate",
+                        "md5sum",
+                        "isolation_source",
+                    ],
+                    axis=1,
+                    inplace=True,
+                )
                 df.rename(
                     columns={
                         "collection_date": "date",
@@ -95,17 +117,52 @@ class Gen3Query(Subcommand):
                         "country_region": "country",
                         "continent": "region",
                         "province_state": "division",
+                        "submitting_lab_PI": "authors",
                     },
                     inplace=True,
                 )
-                df["strain"] = df["strain"].apply(lambda r: "_".join(r.split("_")[:-1]))
-                df["strain"] = df["strain"].str.replace(project + "_", "")
-                df["location"] = [
-                    "_".join(i)
-                    for i in zip(df["location"].map(str), df["division"].map(str))
-                ]
-                df.to_csv(query_obj["file"], header=True, index=False)
-                IO.rm_bk_qt(query_obj["file"])
+
+                # create new series of correct strain names
+                strain_name = df["strain"].str.replace(project + "_", "")
+                strain_name = strain_name.apply(lambda r: "/".join(r.split("_")[:-1]))
+
+                df = df.apply(lambda x: x.str[0])
+                df["strain"] = strain_name
+
+                location_translation_abs_path = IO.abs_path(
+                    2, "config/IL_county_translation_table.csv"
+                )
+                location_translation = pd.read_csv(location_translation_abs_path)
+
+                location_translation_dict = dict(location_translation.values)
+
+                df.replace({"location": location_translation_dict}, inplace=True)
+
+                df.loc[df["region"] == "Asia", "country"] = "China"
+                df.loc[df["region"] == "Asia", "division"] = "Hubei"
+                df.loc[df["region"] == "Asia", "location"] = "Wuhan"
+
+                df["region_exposure"] = df["region"]
+                df["country_exposure"] = df["country"]
+                df["division_exposure"] = df["division"]
+                df["location_exposure"] = df["location"]
+                df["virus"] = "ncov"
+                df["segment"] = "genome"
+                df.replace(to_replace=r"\?{3}", value="NA", regex=True, inplace=True)
+
+                if query_obj["format"] == "csv":
+                    df.to_csv(query_obj["file"], header=True, index=False, na_rep="?")
+
+                elif query_obj["format"] == "tsv":
+                    df.to_csv(
+                        query_obj["file"],
+                        header=True,
+                        index=False,
+                        sep="\t",
+                        na_rep="?",
+                    )
+
+                IO.rm_bk_qt(query_obj["file"], query_obj["format"])
                 return len(data)
         except requests.exceptions.Timeout:
             logger.error("Error querying Guppy, object data query failed")

@@ -1,0 +1,47 @@
+# This is where we define which builds we'd like to run.
+# This example includes 4 separate builds, ranging from the regional (global) to location (county) level.
+# You can comment-out, remove, or add as many builds as you'd like.
+
+# Each build needs a name, a defined subsampling process, and geographic attributes used for subsampling.
+# Geography is specified by build attributes (e.g., `region`, `country`, `division`, `location`) that are referenced from subsampling schemes.
+
+# The default config file, `./defaults/parameters.yaml` has reasonable default subsampling methods for each geographic resolution.
+# These subsample primarily from the area of interest ("focus"), and add in background ("contextual") sequences from the rest of the world.
+# Contextual sequences that are genetically similar to (hamming distance) and geographically near the focal sequences are heavily prioritized.
+
+# In this example, we use these default methods. See other templates for examples of how to customize this subsampling scheme.
+
+# Define input files.
+inputs:
+  - name: IL-Tree
+    metadata: data/covid19_IL_metadata.tsv
+    sequences: data/covid19_IL_sequence.fasta
+
+builds:
+  # Zoom out one level: this build focuses on all of Illinois State. no subsampling
+  # with a build name that will produce the following URL fragment on Nextstrain/auspice:
+  # /ncov/north-america/usa/illinois
+  IL-Tree:
+    subsampling_scheme: all # use a default subsampling scheme defined in defaults/parameters.yaml
+    region: North America
+    country: USA
+    division: Illinois
+    title: "Nextstrain Build for Illinois Covid19 Virus"
+
+# Here, you can specify what type of auspice_config you want to use
+# and what description you want. These will apply to all the above builds.
+# If you want to specify specific files for each build - you can!
+# See the 'example_advanced_customization' builds.yaml
+files:
+  auspice_config: "my_profiles/IL_SIU_tree/my_auspice_config.json"
+  description: "my_profiles/IL_SIU_tree/my_description.md"
+  ordering: "my_profiles/IL_SIU_tree/color_ordering_colorclades.tsv"
+
+traits:
+  IL-Tree: ### build name
+    sampling_bias_correction: 2.5
+    columns: ["location"] ### traits to reconstruct; must match column names in metadata.tsv
+
+# the define which strain in the data file should be used as root during refine process
+refine:
+  root: Wuhan-Hu-1-MN908947.gb

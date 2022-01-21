@@ -73,7 +73,7 @@ class IO(object):
         with open(file, "w") as outfile:
             outfile.write(jstr)
 
-    def rm_bk_qt(file: str) -> None:
+    def rm_bk_qt(file: str, file_format: str) -> None:
         """
         Remove sqaure bracket and quote in csv file
         :param file: file path
@@ -87,8 +87,12 @@ class IO(object):
             line = re.sub(r"[\'\[\]]", "", line)
             ofh.write(line)
         ofh.close()
-        df = pd.read_csv(file)
-        df.to_csv(file, date_format="%Y-%m-%d", header=True, index=False)
+        if file_format == "csv":
+            df = pd.read_csv(file)
+            df.to_csv(file, date_format="%Y-%m-%d", header=True, index=False)
+        elif file_format == "tsv":
+            df = pd.read_csv(file, sep="\t")
+            df.to_csv(file, date_format="%Y-%m-%d", header=True, index=False, sep="\t")
 
     @staticmethod
     def abs_path(level: int, file_path: str) -> str:

@@ -10,6 +10,11 @@ if [[ -z "$GEN3_API_KEY" || ! -f "$GEN3_API_KEY" ]]; then
   exit 1
 fi
 
+if [ ! -d gen3-augur/data ] || [[ ! -d gen3-augur/logs ]]; then
+  mkdir -p gen3-augur/data;
+  mkdir -p gen3-augur/logs;
+fi;
+
 endpoint="https://chicagoland.pandemicresponsecommons.org/"
 
 project_id="Walder-SIU-SARS-CoV2"

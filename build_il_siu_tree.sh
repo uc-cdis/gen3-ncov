@@ -54,4 +54,4 @@ cp ./gen3-augur/data/genomic_file_${today}_manifest.tsv ./data/covid19_IL_metada
 nextstrain build . --configfile my_profiles/IL_SIU_tree/builds.yaml
 
 # Build an IL tree with subsampling scheme, uncomment the line below
-# nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml
+#nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml

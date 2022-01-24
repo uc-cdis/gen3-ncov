@@ -74,7 +74,7 @@ class Gen3Query(Subcommand):
         :params headers: header for requests which has token
         :params query_obj: dictionary object that has parameters for query
         """
-        project = os.getenv("project_id")
+        project = query_obj["value"]
         api_url = query_obj["url"] + "guppy/download"
         if query_obj["filter"]:
             query = {

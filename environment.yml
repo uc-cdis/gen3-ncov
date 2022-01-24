@@ -1,0 +1,19 @@
+name: gen3-ncov
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - augur
+  - auspice
+  - nextstrain-cli
+  - nextalign
+  - snakemake
+  - awscli
+  - git
+  - pip
+  - pip:
+    - biopython
+    - pandas
+    - requests
+    - -e ./gen3-augur

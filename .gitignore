@@ -16,7 +16,7 @@ stats.json
 /data.nextstrain.org/
 
 # Sensitive environment variables
-environment*
+# environment*
 
 # Snakemake state dir
 /.snakemake

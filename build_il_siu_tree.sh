@@ -10,6 +10,11 @@ if [[ -z "$GEN3_API_KEY" || ! -f "$GEN3_API_KEY" ]]; then
   exit 1
 fi
 
+if [ ! -d gen3-augur/data ] || [[ ! -d gen3-augur/logs ]]; then
+  mkdir -p gen3-augur/data;
+  mkdir -p gen3-augur/logs;
+fi;
+
 endpoint="https://chicagoland.pandemicresponsecommons.org/"
 
 project_id="Walder-SIU-SARS-CoV2"
@@ -54,4 +59,4 @@ cp ./gen3-augur/data/genomic_file_${today}_manifest.tsv ./data/covid19_IL_metada
 nextstrain build . --configfile my_profiles/IL_SIU_tree/builds.yaml
 
 # Build an IL tree with subsampling scheme, uncomment the line below
-# nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml
+#nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml

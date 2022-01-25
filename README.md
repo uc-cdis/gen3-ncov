@@ -17,7 +17,7 @@ For faster installation, update Conda to the latest version and install `Mamba`.
 conda update -n base conda
 conda install -n base -c conda-forge manba
 ```
-Create a virtual conda environment. The command below install all the nexstrain tools as well as gen3-augur query tools
+Create a virtual conda environment. The command below installs all the nexstrain tools as well as gen3-augur query tools
 ```
 # change directory under gen3-ncov folder
 cd gen3-ncov
@@ -28,10 +28,10 @@ Confirm that installation works
 conda activate {env_name}
 nextstrain check-setup --set-default
 ```
-Set environment variable `GEN3_API_KEY`
+Set environment variable `GEN3_API_KEY`. The PRC credentials (json format) can be downloaded from the profile page after Login to [PRC data commons](https://chicagoland.pandemicresponsecommons.org/).
 ```
-export GEN3_API_KEY={path_to_PRC_credential_json}
-# To confirm variable
+export GEN3_API_KEY={path_to_local_PRC_credential_json}
+# To confirm env variable
 echo $GEN3_API_KEY
 ```
 ## Run analysis workflow
@@ -40,8 +40,9 @@ To get the phylogenetic tree including all Illinois covid19 strains hosted at PR
 bash build_il_siu_tree.sh
 ```
 - This bash script uses the profile of `IL_SIU_tree` under `./my_profiles` folder
-- The workflow includes all IL covid19 strains submitted to [PRC data commons](https://chicagoland.pandemicresponsecommons.org/) without subsampling.
-- To run a quicker analysis with subsampling scheme, run the command below
+- This script uses the gen3-client command-line tool to download object file from PRC commons. The tool included in this repo is compatible with linux system. To get the gen3-client for windows and OSX, visit [cdis-data-client](https://github.com/uc-cdis/cdis-data-client)
+- This workflow performs the analysis with all IL covid19 strains submitted to [PRC data commons](https://chicagoland.pandemicresponsecommons.org/) without subsampling scheme.
+- To run a quicker analysis with subsampling scheme, run the command below after downloading step is done.
 ```
 nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml
 ```

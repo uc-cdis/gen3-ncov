@@ -28,11 +28,12 @@ Confirm that installation works
 conda activate {env_name}
 nextstrain check-setup --set-default
 ```
-Set environment variable `GEN3_API_KEY`. The PRC credentials (json format) can be downloaded from the profile page after Login to [PRC data commons](https://chicagoland.pandemicresponsecommons.org/).
+Edit file of `set_env_var.sh` and add the path of PRC credentials to the variable `GEN3_API_KEY`. The PRC credentials (json format) can be downloaded from the profile page after Login to [PRC data commons](https://chicagoland.pandemicresponsecommons.org/). After saving the file, run the command line below.
 ```
-export GEN3_API_KEY={path_to_local_PRC_credential_json}
+source set_env_var.sh
 # To confirm env variable
 echo $GEN3_API_KEY
+echo $project_id
 ```
 ## Run analysis workflow
 To get the phylogenetic tree including all Illinois covid19 strains hosted at PRC data commons. Simply run

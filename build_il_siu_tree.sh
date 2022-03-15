@@ -56,7 +56,7 @@ expect_files=$(gen3-augur Gen3Query --url "${endpoint}/" --type genomic_file --f
 cp ./gen3-augur/data/genomic_file_${today}_manifest.tsv ./data/covid19_IL_metadata.tsv
 
 # Run nextstrain ncov workflow to build an IL tree without subsampling. The output will be stored under auspice/ folder
-nextstrain build . --configfile my_profiles/IL_SIU_tree/builds.yaml
+#nextstrain build . --configfile my_profiles/IL_SIU_tree/builds.yaml
 
 # Build an IL tree with subsampling scheme, uncomment the line below
-#nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml
+nextstrain build . --configfile my_profiles/IL_SIU_tree_subsampling/builds.yaml

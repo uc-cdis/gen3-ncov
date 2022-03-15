@@ -26,13 +26,13 @@ builds:
     region: North America
     country: USA
     division: Illinois
-    title: "Nextstrain Build for Illinois Covid19 Virus-subsampling"
+    title: "Nextstrain Build for Illinois Covid19 Virus"
 
 subsampling:
   illinois_county:
     division:
       group_by: "location year mouth"
-      max_sequences: 1000
+      seq_per_group: 800
       exclude: "--exclude-where 'region!={region}' 'country!={country}' 'division!={division}'"
     global:
       group_by: "country year month"

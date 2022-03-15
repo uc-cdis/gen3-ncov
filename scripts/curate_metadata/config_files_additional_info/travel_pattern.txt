@@ -2,6 +2,7 @@ Imported from XXX
 Traveled to XXX
 traveled to XXX
 Travel to XXX
+travel to XXX
 Travel history to XXX
 Infected while travelling in XXX
 Infected while travelling to XXX
@@ -121,6 +122,7 @@ other : imported case from XXX
 Others: Travel history to XXX
 Others: travel history to XXX
 others: travel history to XXX
+Others: Travel History to XXX
 Returned from XXX
 Travel history: XXX (2021-11-22)
 Travel History: XXX
@@ -136,3 +138,9 @@ XXX Travel
 Returning Overseas Filipino Travel History: XXX
 Patient traveled from XXX
 Travel history to XXX, Symptomatic (mild)
+The patient recently traveled to XXX
+Foreign (unknown)/Traveled to XXX
+American /Traveled to XXX
+Patient traveled recently to XXX
+Returning Overseas Filipino With History of Travel: XXX
+Travel History:XXX

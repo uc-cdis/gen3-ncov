@@ -69,3 +69,6 @@ scripts/curate_metadata/config_curate_metadata/manualAnnotationRules.txt
 
 # SLURM log files
 slurm-*.out
+
+# credential location in set_env_var.sh
+set_env_var.sh

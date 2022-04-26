@@ -11,6 +11,10 @@ dependencies:
   - snakemake
   - awscli
   - git
+  - nextclade
+  - nextalign
+  - pangolin
+  - pangolearn
   - pip
   - pip:
     - biopython

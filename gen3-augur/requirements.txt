@@ -1,4 +1,4 @@
 biopython~=1.77
 pandas~=1.0.0
-setuptools~=46.0
+setuptools~=70.0.0
 requests~=2.22
